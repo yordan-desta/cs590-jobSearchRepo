@@ -1,1 +1,1 @@
-# cs590-jobSearchRepo
+# job search microservice implementation for CS590
