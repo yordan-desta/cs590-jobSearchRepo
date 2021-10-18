@@ -27,7 +27,7 @@ const app = express();
 
 const kafka = new Kafka({
   clientId: 'notification-service',
-  brokers: ['localhost:9092'],
+  brokers: [process.env.KAFKA_BROKER_URL],
   ssl: false,
   connectionTimeout: 3000,
   requestTimeout: 25000,
@@ -42,18 +42,24 @@ const admin = kafka.admin()
 
 const runAdmin = async () => {
   await admin.connect()
+  await admin.createTopics({
+    topics: [{
+      topic: "notification-topic",
+      numPartitions: 3, 
+    }]
+  }).then((msg) => console.log(`Topic Created?: ${msg}`));
   await admin.listTopics().then((data) => console.log(data))
   await admin.disconnect()
 }
 
 const producer = kafka.producer()
 
-const runProducer = async (message) => {
+const runProducer = async (data) => {
   await producer.connect()
   await producer.send({
     topic: 'notification-topic',
     messages: [
-      { value: 'Hello KafkaJS!!' },
+      { value: data.message, partition: data.user_id},
     ],
   })
   
@@ -69,11 +75,11 @@ const runConsumer = async () => {
   await consumer.run({
   eachMessage: async ({ topic, partition, message }) => {
       // Run Producer
-      runProducer()
+      runProducer({ partition, message })
       console.log({
       value: message.value.toString(),
       })
-  },
+    },
   })
 }
 
