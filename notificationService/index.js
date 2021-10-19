@@ -6,24 +6,6 @@ const { url } = require("./db.config");
 
 const app = express();
 
-// const { KAFKA_USERNAME: username, KAFKA_PASSWORD: password } = process.env
-// const sasl = username && password ? { username, password, mechanism: 'plain' } : null
-// const ssl = !!sasl
-
-// For Production code
-// const conf = {
-//   clientId: 'backend',
-//   brokers: [process.env.KAFKA_BROKER_URL],
-//   ssl: true,
-//   sasl: {
-//     mechanism: 'plain' as SASLMechanism,
-//     username: process.env.CONFLUENT_KAFKA_API_KEY,
-//     password: process.env.CONFLUENT_KAFKA_API_SECRET,
-//   },
-// };
-// const kafka = new Kafka(conf);
-
-
 const kafka = new Kafka({
   clientId: 'notification-service',
   brokers: [process.env.KAFKA_BROKER_URL],
@@ -32,20 +14,19 @@ const kafka = new Kafka({
   requestTimeout: 25000,
   logLevel: logLevel.ERROR,
   retry: {
-      initialRetryTime: 100,
-      retries: 8
+    initialRetryTime: 100,
+    retries: 8
   }
 })
 
-const client = new MongoClient(url);
+const mongoClient = new MongoClient(url);
 const admin = kafka.admin()
 
 const runAdmin = async () => {
   await admin.connect()
   await admin.createTopics({
     topics: [{
-      topic: "notification-topic",
-      numPartitions: 3
+      topic: "notification-topic"
     }]
     // {
     //   topic: "job-topic",
@@ -60,10 +41,10 @@ const runAdmin = async () => {
 }
 
 const consumerJob = kafka.consumer({ groupId: 'job-group' });
-// const consumerJobSeeker = kafka.consumer({ groupId: 'job-seeker-group' })
+const consumerJobSeeker = kafka.consumer({ groupId: 'job-seeker-group' })
 
-const runConsumer = async () => {
-  await client.connect().then((data) => {
+const runJobConsumer = async () => {
+  await mongoClient.connect().then((data) => {
     console.log("--------------------");
     console.log("Connected to MongoDB");
     console.log("--------------------");
@@ -72,26 +53,52 @@ const runConsumer = async () => {
   await consumerJob.subscribe({ topic: 'job-topic', fromBeginning: true })
 
   await consumerJob.run({
-  eachMessage: async ({ topic, partition, message }) => {
+    eachMessage: async ({ topic, partition, message }) => {
+      
       console.log({
-      value: message.value.toString(),
+        value: message.value.toString(),
       })
     },
   })
+  await mongoClient.close()
+}
+
+const runJobSeekerConsumer = async () => {
+  await mongoClient.connect().then((data) => {
+    console.log("--------------------");
+    console.log("Connected to MongoDB");
+    console.log("--------------------");
+  })
+  await consumerJobSeeker.connect()
+  await consumerJobSeeker.subscribe({ topic: 'job-seeker-skills-topic', fromBeginning: true })
+
+  await consumerJobSeeker.run({
+    //EachBatch for saving users??
+    eachMessage: async ({ topic, partition, message }) => {
+      mongoClient.db().collection().insertOne({ user_id: message.user_id, skills: message.skills })
+      console.log({
+        value: message.value.toString(),
+      })
+    },
+  })
+  await mongoClient.close()
 }
 
 // Run Admin
 runAdmin()
 
-// Run Consumer
-runConsumer()
+// Run Job Consumer 
+runJobConsumer()
+
+// Run Job Consumer 
+runJobSeekerConsumer()
 
 //health check
 app.get('/', async (req, res) => {
-    res.send('Ok From Notification Service')
+  res.send('Ok From Notification Service')
 }, []);
 
 const port = process.env.PORT
 app.listen(port, () => {
-    console.log(`Payment Service listening at http://localhost:${port}`)
+  console.log(`Payment Service listening at http://localhost:${port}`)
 })
