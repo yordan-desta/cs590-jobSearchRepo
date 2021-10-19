@@ -8,3 +8,4 @@ data:
   kafka-address: kafka:9092
   kafka-job-create-topic-name: jobCreated
   kafka-recruiter-create-topic-name: recruiterCreated
+  recruiter-search-client-id: recruiterSearchClientId8000

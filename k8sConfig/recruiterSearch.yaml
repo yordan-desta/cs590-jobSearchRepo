@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: recruiter-search-ms-deployment
+  name: recruiter-search-deployment
   labels:
     app: recruiter-search-ms
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: recruiter-search-ms
