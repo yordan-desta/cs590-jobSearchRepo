@@ -1,6 +1,8 @@
 const express = require("express");
 const { Kafka, logLevel } = require('kafkajs')
+const { MongoClient } = require('mongodb');
 const env = require("env2")(".env");
+const { url } = require("./db.config");
 
 const app = express();
 
@@ -11,19 +13,16 @@ const app = express();
 // For Production code
 // const conf = {
 //   clientId: 'backend',
-//   brokers: KAFKA.bootstrapServers,
+//   brokers: [process.env.KAFKA_BROKER_URL],
 //   ssl: true,
 //   sasl: {
 //     mechanism: 'plain' as SASLMechanism,
-//     username: ENV.CONFLUENT_KAFKA_API_KEY,
-//     password: ENV.CONFLUENT_KAFKA_API_SECRET,
+//     username: process.env.CONFLUENT_KAFKA_API_KEY,
+//     password: process.env.CONFLUENT_KAFKA_API_SECRET,
 //   },
 // };
 // const kafka = new Kafka(conf);
-// const producer = kafka.producer({
-//   createPartitioner: Partitioners.JavaCompatiblePartitioner,
-// });
-// await producer.connect();
+
 
 const kafka = new Kafka({
   clientId: 'notification-service',
@@ -38,6 +37,7 @@ const kafka = new Kafka({
   }
 })
 
+const client = new MongoClient(url);
 const admin = kafka.admin()
 
 const runAdmin = async () => {
@@ -45,37 +45,34 @@ const runAdmin = async () => {
   await admin.createTopics({
     topics: [{
       topic: "notification-topic",
-      numPartitions: 3, 
+      numPartitions: 3
     }]
+    // {
+    //   topic: "job-topic",
+    //   numPartitions: 3, 
+    // }, {
+    //   topic: "job-seeker-skills-topic",
+    //   numPartitions: 3
+    // }
   }).then((msg) => console.log(`Topic Created?: ${msg}`));
   await admin.listTopics().then((data) => console.log(data))
   await admin.disconnect()
 }
 
-const producer = kafka.producer()
-
-const runProducer = async (data) => {
-  await producer.connect()
-  await producer.send({
-    topic: 'notification-topic',
-    messages: [
-      { value: data.message, partition: data.user_id},
-    ],
-  })
-  
-  await producer.disconnect()
-}
-
-const consumer = kafka.consumer({ groupId: 'job-group' })
+const consumerJob = kafka.consumer({ groupId: 'job-group' });
+// const consumerJobSeeker = kafka.consumer({ groupId: 'job-seeker-group' })
 
 const runConsumer = async () => {
-  await consumer.connect()
-  await consumer.subscribe({ topic: 'new-job-topic', fromBeginning: true })
+  await client.connect().then((data) => {
+    console.log("--------------------");
+    console.log("Connected to MongoDB");
+    console.log("--------------------");
+  })
+  await consumerJob.connect()
+  await consumerJob.subscribe({ topic: 'job-topic', fromBeginning: true })
 
-  await consumer.run({
+  await consumerJob.run({
   eachMessage: async ({ topic, partition, message }) => {
-      // Run Producer
-      runProducer({ partition, message })
       console.log({
       value: message.value.toString(),
       })
@@ -88,7 +85,6 @@ runAdmin()
 
 // Run Consumer
 runConsumer()
-
 
 //health check
 app.get('/', async (req, res) => {
