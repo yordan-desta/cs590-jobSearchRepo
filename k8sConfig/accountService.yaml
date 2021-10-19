@@ -23,7 +23,7 @@ spec:
           - name: SERVER_PORT 
             value: "8000"
           - name: DB_URL
-            value: account-db-mysql
+            value: account-service-database-mysql
           - name: DB_NAME
             value: "account_db"
           - name: DB_USERNAME
