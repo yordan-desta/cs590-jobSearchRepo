@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-ms-deployment
+  labels:
+    app: account-ms
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: account-ms
+  template:
+    metadata:
+      labels:
+        app: account-ms
+    spec:
+      containers:
+        - name: account-ms
+          image: pyordan/js-account-service:1.0
+          ports:
+          - containerPort: 8000
+          env:
+          - name: SERVER_PORT 
+            value: "8000"
+          - name: DB_URL
+            value: account-db-mysql
+          - name: DB_NAME
+            value: "account_db"
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: job-search-app-secret
+                key: account-db-username
+          - name: DB_PASSWORD
+            valueFrom: 
+              secretKeyRef:
+                name: job-search-app-secret
+                key: account-db-password
+          - name: JWT_SECRET
+            valueFrom: 
+              secretKeyRef:
+                name: job-search-app-secret
+                key: jwt-secret
+          - name: JWT_EXPIRATION
+            valueFrom: 
+              secretKeyRef:
+                name: job-search-app-secret
+                key: jwt-expire      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: account-ms-service
+spec:
+  selector:
+    app: account-ms
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
