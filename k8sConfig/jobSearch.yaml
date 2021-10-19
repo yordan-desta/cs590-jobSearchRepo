@@ -16,12 +16,12 @@ spec:
     spec:
       containers:
         - name: job-search-ms
-          image: pyordan/js-job-search-service:1.0
+          image: pyordan/js-job-search-service:1.5
           ports:
           - containerPort: 8000
           env:
           - name: PORT 
-            value: 8000
+            value: "8000"
           - name: ES_PASSWORD
             valueFrom:
               secretKeyRef:
