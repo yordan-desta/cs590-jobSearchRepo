@@ -54,7 +54,7 @@ public class AuthController {
 
     @PostMapping("/verify-token")
     public ResponseEntity<?> verifyToken( @CurrentUser UserPrincipal u) {
-        return ResponseEntity.ok(new JwtAuthenticationResponse("",u));
+        return ResponseEntity.ok(u);
     }
 
     @PostMapping("/signin")
