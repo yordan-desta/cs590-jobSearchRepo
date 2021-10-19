@@ -7,3 +7,4 @@ data:
   es-address: http://jobsearches-es-http:9200/
   kafka-address: kafka:9092
   kafka-job-create-topic-name: jobCreated
+  kafka-recruiter-create-topic-name: recruiterCreated
