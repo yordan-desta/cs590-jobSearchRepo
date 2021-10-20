@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jobs-ms-deployment
+  labels:
+    app: jobs-ms
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jobs-ms
+  template:
+    metadata:
+      labels:
+        app: jobs-ms
+    spec:
+      containers:
+        - name: jobs-ms
+          image: pyordan/js-jobs-service:1.0
+          ports:
+          - containerPort: 8000
+          env:
+          - name: SERVER_PORT 
+            value: "8000"
+          - name: DB_URL
+            value: jobs-database-mysql-primary
+          - name: DB_NAME
+            value: "jobs_db"
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: job-search-app-secret
+                key: jobs-db-username
+          - name: DB_PASSWORD
+            valueFrom: 
+              secretKeyRef:
+                name: job-search-app-secret
+                key: jobs-db-password
+          - name: JWT_SECRET
+            valueFrom: 
+              secretKeyRef:
+                name: job-search-app-secret
+                key: jwt-secret
+          - name: JWT_EXPIRATION
+            valueFrom: 
+              secretKeyRef:
+                name: job-search-app-secret
+                key: jwt-expire 
+          - name: ACCOUNT_SERVICE_SERVICE
+            value: http://account-ms-service:8000
+          - name: KAFKA_SERVER
+            valueFrom: 
+              configMapKeyRef:
+                name: job-search-app-config
+                key: kafka-address
+          - name: KAFKA_GROUP_ID
+            value: "jobService0909"   
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jobs-ms-service
+spec:
+  selector:
+    app: jobs-ms
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000

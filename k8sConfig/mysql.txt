@@ -1,5 +1,5 @@
-helm install account-database bitnami/mysql \
---set auth.rootPassword=root\
+helm install jobs-database bitnami/mysql \
+--set auth.rootPassword=root \
 --set secondary.replicaCount=3 \
---set auth.database=account_db \
+--set auth.database=jobs_db \
 --set architecture=replication
