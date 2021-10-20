@@ -25,15 +25,15 @@ spec:
           - name: JOB_SEARCH_ENDPOINT
             value: http://job-search-ms-service:8000
           - name: CANDIDATE_SEARCH_ENDPOINT
-            value: http://recruiter-search-ms
+            value: http://recruiter-search-ms-service:8000
           - name: JOBS_ENDPOINT
             value: http://localhost:9090
           - name: ACCOUNTS_ENDPOINT
-            value: http://account-ms-service   
+            value: http://account-ms-service:8000
           - name: JOB_SEARCH_API
             value: "/api/job/search"
           - name: CANDIDATE_SEARCH_API
-            value: "/api/candidate/search"
+            value: "/api/recruiter/search"
           - name: JOB_API
             value: "/jobs"
           - name: ACCOUNT_API
