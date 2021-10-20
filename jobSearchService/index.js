@@ -41,16 +41,18 @@ const run = async() => {
 
     await consumer.run({
         eachMessage: async({ topic, partion, message }) => {
-            console.log("Recieved message: " + topic + "message: " + message);
-            const data = JSON.parse(message.value.toString());
-            client.index({
-                index: process.env.ELASTICINDEX,
-                body: data
-            }).then(res => {
-                console.log("recieving: ", topic, JSON.parse(message.value.toString()));
-                // console.log(res);
-                // printData();
-            }).catch(err => console.log(err));
+            console.log("Recieved message topic: " + topic + "message: " + message.value.toString());
+            try {
+                const data = JSON.parse(message.value.toString());
+                client.index({
+                    index: process.env.ELASTICINDEX,
+                    body: data
+                }).then(res => {
+                    console.log(topic, JSON.parse(message.value.toString()));
+                }).catch(err => console.log(err));
+            } catch (error) {
+                console.log("unable to serialize object: " + message.value.toString());
+            }
         }
     });
 

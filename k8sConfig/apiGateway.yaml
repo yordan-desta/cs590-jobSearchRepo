@@ -33,7 +33,7 @@ spec:
           - name: JOB_SEARCH_API
             value: "/api/job/search"
           - name: CANDIDATE_SEARCH_API
-            value: "/api/recruiter/search"
+            value: "/api/seeker/search"
           - name: JOB_API
             value: "/api/js"
           - name: ACCOUNT_API

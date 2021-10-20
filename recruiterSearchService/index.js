@@ -16,7 +16,7 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/api/recruiter/search', recruiterRoutes);
+app.use('/api/seeker/search', recruiterRoutes);
 
 app.use((req, res, next) => {
     console.log(req.url, req.body, req.method, req.params);
@@ -40,13 +40,19 @@ const run = async() => {
 
     await consumer.run({
         eachMessage: async({ topic, partion, message }) => {
-            const data = JSON.parse(message.value.toString());
-            client.index({
-                index: process.env.ELASTICINDEX,
-                body: data
-            }).then(res => {
-                console.log(topic, JSON.parse(message.value.toString()));
-            }).catch(err => console.log(err));
+            console.log("Recieved message topic: " + topic + "message: " + message.value.toString());
+            try {
+                const data = JSON.parse(message.value.toString());
+                client.index({
+                    index: process.env.ELASTICINDEX,
+                    body: data
+                }).then(res => {
+                    console.log(topic, JSON.parse(message.value.toString()));
+                }).catch(err => console.log(err));
+            } catch (error) {
+                console.log("unable to serialize object: " + message.value.toString());
+            }
+
         }
     });
 }
