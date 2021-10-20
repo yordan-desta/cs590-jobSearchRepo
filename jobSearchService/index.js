@@ -41,6 +41,7 @@ const run = async() => {
 
     await consumer.run({
         eachMessage: async({ topic, partion, message }) => {
+            console.log("Recieved message: " + topic + "message: " + message);
             const data = JSON.parse(message.value.toString());
             client.index({
                 index: process.env.ELASTICINDEX,
