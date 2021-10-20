@@ -1,5 +1,9 @@
 package edu.miu.cs.cs590.jobservice.Models;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import edu.miu.cs.cs590.jobservice.Models.enums.Category;
 import com.github.javafaker.Faker;
 import lombok.AllArgsConstructor;
@@ -18,6 +22,10 @@ public class VacancyApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
+
+
+    @JsonSerialize(using= LocalDateSerializer.class)
+    @JsonDeserialize(using= LocalDateDeserializer.class)
     private LocalDate applyDate;
 
     @Max(value = 10)
