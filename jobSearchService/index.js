@@ -1,16 +1,23 @@
 require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
-const { Client } = require('@elastic/elasticsearch')
-const client = new Client({ node: process.env.ES_ADDRESS })
+
+const { Client } = require('@elastic/elasticsearch');
+
+const client = new Client({
+    node: process.env.ES_ADDRESS,
+    auth: {
+        username: process.env.ES_USERNAME,
+        password: process.env.ES_PASSWORD
+    }
+})
 const { Kafka } = require("kafkajs");
 const { json } = require("body-parser");
 const jobsRoutes = require("./routes/jobs");
 const app = express();
 
-app.use(express.urlencoded({extended: true})); 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/api/search', jobsRoutes);
+app.use('/api/job/search', jobsRoutes);
 
 app.use((req, res, next) => {
     console.log(req.url, req.body, req.method, req.params);
@@ -23,26 +30,27 @@ const kafka = new Kafka({
 });
 
 const gid = process.env.JOBSEARCH_SERVICE_GROUP;
-const consumer = kafka.consumer({ groupId: gid + Date.now()});
+const consumer = kafka.consumer({ groupId: gid + Date.now() });
 
-const run = async () => {
+const run = async() => {
     await consumer.connect();
     await consumer.subscribe({
-       topic: process.env.JOBSEARCH_SERVICE_TOPIC, fromBeginning: true 
-      })
+        topic: process.env.JOBSEARCH_SERVICE_TOPIC,
+        fromBeginning: true
+    })
 
     await consumer.run({
-      eachMessage: async ({topic, partion, message} ) => {
-        const data = JSON.parse(message.value.toString());
-        client.index({
-          index: process.env.ELASTICINDEX,
-          body: data
-        }).then(res => {
-          // console.log(topic, JSON.parse( message.value.toString()));
-          // console.log(res);
-          // printData();
-        }).catch(err => console.log(err));
-      }
+        eachMessage: async({ topic, partion, message }) => {
+            const data = JSON.parse(message.value.toString());
+            client.index({
+                index: process.env.ELASTICINDEX,
+                body: data
+            }).then(res => {
+                console.log("recieving: ", topic, JSON.parse(message.value.toString()));
+                // console.log(res);
+                // printData();
+            }).catch(err => console.log(err));
+        }
     });
 
     // const producer = kafka.producer();
@@ -68,11 +76,10 @@ const run = async () => {
 // }
 
 run().then(() => {
-  //printData();
-  console.log("Done")
-} , err => {console.log(err)});
+    //printData();
+    console.log("Done")
+}, err => { console.log(err) });
 
 app.listen(process.env.PORT || 4000, () => {
-    console.log("express app is runnn.........");
+    console.log("express app is running on port " + process.env.PORT);
 });
-

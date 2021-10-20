@@ -5,6 +5,7 @@ import edu.miu.cs.cs590.accountservice.Models.JobSeeker;
 import edu.miu.cs.cs590.accountservice.Payload.Requests.CreateJSRequest;
 import edu.miu.cs.cs590.accountservice.Payload.Requests.UpdateJobseekerRequest;
 import edu.miu.cs.cs590.accountservice.Services.JobSeekerService;
+import edu.miu.cs.cs590.accountservice.Services.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +17,14 @@ import java.util.List;
 @RequestMapping("/api/job-seeker")
 public class JobSeekerController {
 
+	private final ProducerService producerService;
+
 	@Autowired
 	private JobSeekerService jobSeekerService;
+
+	public JobSeekerController(ProducerService producerService) {
+		this.producerService = producerService;
+	}
 
 
 	@GetMapping("/{id}")
@@ -36,7 +43,9 @@ public class JobSeekerController {
 		JobSeeker newJobSeeker = new JobSeeker();
 		newJobSeeker.setBio(jsRequest.getBio());
 		newJobSeeker.setCurrentPosition(jsRequest.getCurrentPosition());
-		return this.jobSeekerService.save(newJobSeeker);
+		newJobSeeker = this.jobSeekerService.save(newJobSeeker);
+		producerService.sendMessage(newJobSeeker.toString());
+		return newJobSeeker;
 	}
 
 	@PutMapping("/{id}")

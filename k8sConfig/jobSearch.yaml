@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: job-search-ms-deployment
+  labels:
+    app: job-search-ms
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: job-search-ms
+  template:
+    metadata:
+      labels:
+        app: job-search-ms
+    spec:
+      containers:
+        - name: job-search-ms
+          image: pyordan/js-job-search-service:1.9
+          ports:
+          - containerPort: 8000
+          env:
+          - name: PORT 
+            value: "8000"
+          - name: ES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: job-search-app-secret
+                key: es-password
+          - name: ES_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: job-search-app-secret
+                key: es-username
+          - name: ES_ADDRESS
+            valueFrom: 
+              configMapKeyRef:
+                name: job-search-app-config
+                key: es-address
+          - name: JOBSEARCH_SERVICE_APP
+            valueFrom: 
+              configMapKeyRef:
+                name: job-search-app-config
+                key: job-search-client-id
+          - name: KAFKA1 
+            valueFrom: 
+              configMapKeyRef:
+                name: job-search-app-config
+                key: kafka-address
+          - name: JOBSEARCH_SERVICE_GROUP
+            value: "jobSearchingService001"          
+          - name: JOBSEARCH_SERVICE_TOPIC
+            valueFrom: 
+              configMapKeyRef:
+                name: job-search-app-config
+                key: kafka-job-create-topic-name
+          - name: ELASTICINDEX
+            value: "jobs"         
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: job-search-ms-service
+spec:
+  selector:
+    app: job-search-ms
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000

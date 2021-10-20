@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recruiter-search-deployment
+  labels:
+    app: recruiter-search-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recruiter-search-ms
+  template:
+    metadata:
+      labels:
+        app: recruiter-search-ms
+    spec:
+      containers:
+        - name: recruiter-search-ms
+          image: pyordan/js-recruiter-search-service:1.0
+          ports:
+          - containerPort: 8000
+          env:
+          - name: PORT 
+            value: "8000"
+          - name: ES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: job-search-app-secret
+                key: es-password
+          - name: ES_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: job-search-app-secret
+                key: es-username
+          - name: ES_ADDRESS
+            valueFrom: 
+              configMapKeyRef:
+                name: job-search-app-config
+                key: es-address
+          - name: RECRUITERSEARCH_SERVICE_APP
+            valueFrom: 
+              configMapKeyRef:
+                name: job-search-app-config
+                key: recruiter-search-client-id
+          - name: KAFKA 
+            valueFrom: 
+              configMapKeyRef:
+                name: job-search-app-config
+                key: kafka-address
+          - name: RECRUITERSEARCH_SERVICE_GROUP
+            value: "recruiterSearchingService001"          
+          - name: RECRUITERSEARCH_SERVICE_TOPIC
+            valueFrom: 
+              configMapKeyRef:
+                name: job-search-app-config
+                key: kafka-recruiter-create-topic-name
+          - name: ELASTICINDEX
+            value: "recruiter"         
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: recruiter-search-ms-service
+spec:
+  selector:
+    app: recruiter-search-ms
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000

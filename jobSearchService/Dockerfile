@@ -1,7 +1,5 @@
-FROM node:14
-
-WORKDIR /searchapiapp
-COPY package*.json ./
+FROM node:alpine3.10
+COPY . .
 RUN npm install
-EXPOSE 2121
-CMD ["node", "index.js"]
+EXPOSE 8000
+ENTRYPOINT ["node", "index.js"]
