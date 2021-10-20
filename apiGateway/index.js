@@ -8,7 +8,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use((req, res, next) => {
-    console.log(req.url, req.method, req.body, req.params, req.query);
+    if (req.url !== '/')
+        console.log(req.url, req.method, req.body, req.params, req.query);
     next();
 });
 
