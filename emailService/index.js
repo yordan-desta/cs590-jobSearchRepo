@@ -41,7 +41,7 @@ const run = async() => {
     // // Wait 5 second before sending a new message
     // await new Promise(resolve => setTimeout(resolve, 5000));
 
-    // const emailbody = { to: "raeyfikreh@gmail.com", subject: "test", text: "test" };
+    // const emailbody = { to: "yordan.desta@gmail.com", subject: "test subject", text: "test body" };
     // await producer.send({
     //   topic: "email-topic",
     //   messages: [
