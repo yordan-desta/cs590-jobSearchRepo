@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-ms-deployment
+  labels:
+    app: api-gateway-ms
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-gateway-ms
+  template:
+    metadata:
+      labels:
+        app: api-gateway-ms
+    spec:
+      containers:
+        - name: api-gateway-ms
+          image: pyordan/js-api-gateway-service:1.1
+          ports:
+          - containerPort: 8000
+          env:
+          - name: PORT 
+            value: "8000"
+          - name: JOB_SEARCH_ENDPOINT
+            value: job-search-ms-service
+          - name: CANDIDATE_SEARCH_ENDPOINT
+            value: recruiter-search-ms
+          - name: JOBS_ENDPOINT
+            value: http://localhost:9090
+          - name: ACCOUNTS_ENDPOINT
+            value: account-ms-service   
+          - name: JOB_SEARCH_API
+            value: "/search/j"
+          - name: CANDIDATE_SEARCH_API
+            value: "/search/r"
+          - name: JOB_API
+            value: "/jobs"
+          - name: ACCOUNT_API
+            value: "/accounts"               
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway-ms-service
+spec:
+  selector:
+    app: api-gateway-ms
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000

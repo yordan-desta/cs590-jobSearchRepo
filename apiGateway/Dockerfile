@@ -1,6 +1,5 @@
 FROM node:alpine3.10
-WORKDIR /apiapp
-COPY . /apiapp/
+COPY . .
 RUN npm install
-EXPOSE 8080
-ENTRYPOINT [ "node", "index.js" ]
+EXPOSE 8000
+ENTRYPOINT ["node", "index.js"]
