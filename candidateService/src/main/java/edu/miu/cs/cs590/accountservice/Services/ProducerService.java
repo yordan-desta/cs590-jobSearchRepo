@@ -1,4 +1,4 @@
-package edu.miu.cs.cs590.jobservice.Services;
+package edu.miu.cs.cs590.accountservice.Services;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ public final class ProducerService {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    @Value("${app.jobServiceTopic}")
+    @Value("${app.jobseekerTopic}")
     private  String TOPIC ;
 
     public ProducerService(KafkaTemplate<String, String> kafkaTemplate) {
