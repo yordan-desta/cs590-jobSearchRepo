@@ -1,5 +1,3 @@
-const env = require("env2")(".env");
-
 const {
     MONGODB_USER,
     MONGODB_PASSWORD,

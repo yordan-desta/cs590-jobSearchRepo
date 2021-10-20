@@ -1,4 +1,7 @@
+const env = require("env2")(".env");
 const { Kafka, logLevel } = require("kafkajs");
+
+// console.log(process.env.KAFKA_BROKER_URL)
 const kafka = new Kafka({
   clientId: process.env.KAFKA_CLIENT_ID,
   brokers: [process.env.KAFKA_BROKER_URL],
@@ -11,17 +14,16 @@ const kafka = new Kafka({
     retries: 8
   }
 })
-
 const producer = kafka.producer()
-const Producer = async (message) => {
-  console.log("Notification Producer");
+
+const Producer = async () => {
   await producer.connect()
   await producer.send({
-    topic: process.env.NOTIFICATION_TOPIC,
+    topic: process.env.JOB_TOPIC,
     messages: [
-      { value: JSON.stringify({user_id: message.user_id, subject: "New Vacancy opened for you", body: "Go and login to check out this opportunity"}) },
+      { value: JSON.stringify({user_id:2,skills:"najed, salah, test"}) },
     ],
   });
 }
 
-module.exports = Producer
+Producer();

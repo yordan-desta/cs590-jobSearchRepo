@@ -1,13 +1,18 @@
 const express = require("express");
-const { Kafka, logLevel } = require('kafkajs')
-const { MongoClient } = require('mongodb');
 const env = require("env2")(".env");
-const { url } = require("./db.config");
-
+const { Kafka, logLevel } = require('kafkajs')
+const mongoClient = require("./mongoClient")
+const Producer = require("./producer")
 const app = express();
 
+mongoClient.connect().then((data) => {
+    console.log("--------------------");
+    console.log("Connected to MongoDB");
+    console.log("--------------------");
+})
+
 const kafka = new Kafka({
-  clientId: 'notification-service',
+  clientId: process.env.KAFKA_CLIENT_ID,
   brokers: [process.env.KAFKA_BROKER_URL],
   ssl: false,
   connectionTimeout: 3000,
@@ -19,69 +24,56 @@ const kafka = new Kafka({
   }
 })
 
-const mongoClient = new MongoClient(url);
 const admin = kafka.admin()
 
 const runAdmin = async () => {
   await admin.connect()
   await admin.createTopics({
     topics: [{
-      topic: "notification-topic"
+      topic: process.env.NOTIFICATION_TOPIC
     }]
-    // {
-    //   topic: "job-topic",
-    //   numPartitions: 3, 
-    // }, {
-    //   topic: "job-seeker-skills-topic",
-    //   numPartitions: 3
-    // }
   }).then((msg) => console.log(`Topic Created?: ${msg}`));
   await admin.listTopics().then((data) => console.log(data))
   await admin.disconnect()
 }
 
-const consumerJob = kafka.consumer({ groupId: 'job-group' });
-const consumerJobSeeker = kafka.consumer({ groupId: 'job-seeker-group' })
+const consumerJob = kafka.consumer({ groupId: process.env.JOB_GROUP });
+const consumerJobSeeker = kafka.consumer({ groupId: process.env.JOB_SEEKER_SKILLS_GROUP })
 
 const runJobConsumer = async () => {
-  await mongoClient.connect().then((data) => {
-    console.log("--------------------");
-    console.log("Connected to MongoDB");
-    console.log("--------------------");
-  })
   await consumerJob.connect()
-  await consumerJob.subscribe({ topic: 'job-topic', fromBeginning: true })
+  await consumerJob.subscribe({ topic: process.env.JOB_TOPIC, fromBeginning: true })
 
   await consumerJob.run({
     eachMessage: async ({ topic, partition, message }) => {
-      
+      // var query = { skills: message.tags };
+      mongoClient.db().collection("jobseekers").find().toArray(function(err, result) {
+        if (err) throw err;
+        console.log(result);
+        for (ele of result) {
+          Producer(ele);
+        }
+      });
       console.log({
         value: message.value.toString(),
       })
     },
   })
-  await mongoClient.close()
 }
 
 const runJobSeekerConsumer = async () => {
-  await mongoClient.connect().then((data) => {
-    console.log("--------------------");
-    console.log("Connected to MongoDB");
-    console.log("--------------------");
-  })
   await consumerJobSeeker.connect()
-  await consumerJobSeeker.subscribe({ topic: 'job-seeker-skills-topic', fromBeginning: true })
+  await consumerJobSeeker.subscribe({ topic: process.env.JOB_SEEKER_SKILLS_TOPIC, fromBeginning: true })
 
   await consumerJobSeeker.run({
-    //EachBatch for saving users??
     eachMessage: async ({ topic, partition, message }) => {
-      mongoClient.db().collection().insertOne({ user_id: message.user_id, skills: message.skills })
-      console.log({
-        value: message.value.toString(),
+      let result = JSON.parse(message.value.toString());
+      mongoClient.db().collection("jobseekers").insertOne({ user_id: result.user_id, skills: result.skills }).catch((e)=>{
+          console.log(e);
       })
+      console.log({user_id: result.user_id, skills: result.skills })
     },
   })
-  await mongoClient.close()
 }
 
 // Run Admin
@@ -92,6 +84,7 @@ runJobConsumer()
 
 // Run Job Consumer 
 runJobSeekerConsumer()
+
 
 //health check
 app.get('/', async (req, res) => {

@@ -1,10 +1,10 @@
 db.createUser({
-    user: 'root',
-    pwd: '123456',
+    user: process.env.MONGODB_USER,
+    pwd: process.env.MONGODB_PASSWORD,
     roles: [
       {
         role: 'readWrite',
-        db: 'notification-db'
+        db: process.env.MONGODB_DATABASE
       }
     ]
   })
