@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: jobs-ms
-          image: pyordan/js-jobs-service:1.0
+          image: pyordan/js-jobs-service:1.4
           ports:
           - containerPort: 8000
           env:
@@ -55,6 +55,11 @@ spec:
                 key: kafka-address
           - name: KAFKA_GROUP_ID
             value: "jobService0909"   
+          - name: KAFKA_JOB_TOPIC
+            valueFrom: 
+                configMapKeyRef:
+                  name: job-search-app-config
+                  key: kafka-job-create-topic-name
 ---
 apiVersion: v1
 kind: Service

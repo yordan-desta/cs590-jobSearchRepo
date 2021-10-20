@@ -119,7 +119,6 @@ derby.log
 spring-test/test-output/
 .gradle
 argfile*
-pom.xml
 activemq-data/
 
 classes/
@@ -149,4 +148,5 @@ atlassian-ide-plugin.xml
 
 # VS Code
 .vscode/
+
 node_modules

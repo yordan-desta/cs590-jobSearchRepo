@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: job-search-ms
-          image: pyordan/js-job-search-service:1.9
+          image: pyordan/js-job-search-service:2.2
           ports:
           - containerPort: 8000
           env:
