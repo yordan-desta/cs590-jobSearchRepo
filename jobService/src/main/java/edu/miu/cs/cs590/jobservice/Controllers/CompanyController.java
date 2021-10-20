@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/company")
+@RequestMapping("api/js/company")
 public class CompanyController {
 
     CompanyService companyService;

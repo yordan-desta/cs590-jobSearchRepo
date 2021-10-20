@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/vacancy")
+@RequestMapping("/api/js/vacancy")
 public class VacancyController {
 
     private final ProducerService producerService;
