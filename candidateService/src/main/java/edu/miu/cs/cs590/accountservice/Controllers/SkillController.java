@@ -1,5 +1,7 @@
 package edu.miu.cs.cs590.accountservice.Controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.miu.cs.cs590.accountservice.Exception.ResourceNotFoundException;
 import edu.miu.cs.cs590.accountservice.Models.JobSeeker;
 import edu.miu.cs.cs590.accountservice.Models.Skill;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/skills")
+@RequestMapping("/api/skills")
 @PreAuthorize("hasRole('JOBSEEKER')")
 public class SkillController {
 
@@ -38,13 +40,15 @@ public class SkillController {
         return this.skillService.findAll();
     }
 
-    @PostMapping("/")
-    Skill newSkill(@RequestBody Skill newSkill,@CurrentUser UserPrincipal currentUser) {
+    @PostMapping
+    Skill newSkill(@RequestBody Skill newSkill,@CurrentUser UserPrincipal currentUser) throws JsonProcessingException {
 
         JobSeeker js = jobSeekerService.findByUserId(currentUser.getId());
         newSkill.setJobSeeker(js);
         newSkill = this.skillService.save(newSkill);
-        producerService.sendMessage(js.toString());
+
+        ObjectMapper mapper = new ObjectMapper();
+        producerService.sendMessage(mapper.writeValueAsString(js));
         return newSkill;
     }
 

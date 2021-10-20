@@ -1,9 +1,13 @@
 package edu.miu.cs.cs590.accountservice.Controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.miu.cs.cs590.accountservice.Exception.ResourceNotFoundException;
 import edu.miu.cs.cs590.accountservice.Models.JobSeeker;
 import edu.miu.cs.cs590.accountservice.Payload.Requests.CreateJSRequest;
 import edu.miu.cs.cs590.accountservice.Payload.Requests.UpdateJobseekerRequest;
+import edu.miu.cs.cs590.accountservice.Security.CurrentUser;
+import edu.miu.cs.cs590.accountservice.Security.UserPrincipal;
 import edu.miu.cs.cs590.accountservice.Services.JobSeekerService;
 import edu.miu.cs.cs590.accountservice.Services.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +21,11 @@ import java.util.List;
 @RequestMapping("/api/job-seeker")
 public class JobSeekerController {
 
-	private final ProducerService producerService;
+	@Autowired
+	private  ProducerService producerService;
 
 	@Autowired
 	private JobSeekerService jobSeekerService;
-
-	public JobSeekerController(ProducerService producerService) {
-		this.producerService = producerService;
-	}
 
 
 	@GetMapping("/{id}")
@@ -39,12 +40,15 @@ public class JobSeekerController {
 
 	@PostMapping
 	@PreAuthorize("hasRole('JOBSEEKER')")
-	JobSeeker newJobSeeker(@RequestBody CreateJSRequest jsRequest) {
+	JobSeeker newJobSeeker(@RequestBody CreateJSRequest jsRequest,@CurrentUser UserPrincipal currentUser) throws JsonProcessingException {
 		JobSeeker newJobSeeker = new JobSeeker();
 		newJobSeeker.setBio(jsRequest.getBio());
 		newJobSeeker.setCurrentPosition(jsRequest.getCurrentPosition());
+		newJobSeeker.setUserId(currentUser.getId());
 		newJobSeeker = this.jobSeekerService.save(newJobSeeker);
-		producerService.sendMessage(newJobSeeker.toString());
+
+		ObjectMapper mapper = new ObjectMapper();
+		producerService.sendMessage(mapper.writeValueAsString(newJobSeeker));
 		return newJobSeeker;
 	}
 
