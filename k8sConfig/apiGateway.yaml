@@ -5,7 +5,7 @@ metadata:
   labels:
     app: api-gateway-ms
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: api-gateway-ms
@@ -16,24 +16,24 @@ spec:
     spec:
       containers:
         - name: api-gateway-ms
-          image: pyordan/js-api-gateway-service:1.1
+          image: pyordan/js-api-gateway-service:1.2
           ports:
           - containerPort: 8000
           env:
           - name: PORT 
             value: "8000"
           - name: JOB_SEARCH_ENDPOINT
-            value: job-search-ms-service
+            value: http://job-search-ms-service:8000
           - name: CANDIDATE_SEARCH_ENDPOINT
-            value: recruiter-search-ms
+            value: http://recruiter-search-ms
           - name: JOBS_ENDPOINT
             value: http://localhost:9090
           - name: ACCOUNTS_ENDPOINT
-            value: account-ms-service   
+            value: http://account-ms-service   
           - name: JOB_SEARCH_API
-            value: "/search/j"
+            value: "/api/job/search"
           - name: CANDIDATE_SEARCH_API
-            value: "/search/r"
+            value: "/api/candidate/search"
           - name: JOB_API
             value: "/jobs"
           - name: ACCOUNT_API

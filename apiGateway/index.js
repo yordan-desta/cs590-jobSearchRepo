@@ -49,6 +49,10 @@ app.use(candidateSearchApi, candidateSearchProxy);
 app.use(jobsAPi, jobsProxy);
 app.use(accountsApi, accountsProxy);
 
+app.get('/', (req, res) => {
+    res.json("working");
+});
+
 const server = app.listen(process.env.PORT, function() {
     console.log(`listening on port ${server.address().port}`)
 });

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: job-search-ms
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: job-search-ms
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: job-search-ms
-          image: pyordan/js-job-search-service:1.5
+          image: pyordan/js-job-search-service:1.9
           ports:
           - containerPort: 8000
           env:
