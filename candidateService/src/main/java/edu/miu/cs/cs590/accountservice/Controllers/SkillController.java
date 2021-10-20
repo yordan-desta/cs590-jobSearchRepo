@@ -7,6 +7,7 @@ import edu.miu.cs.cs590.accountservice.Payload.Response.ApiResponse;
 import edu.miu.cs.cs590.accountservice.Security.CurrentUser;
 import edu.miu.cs.cs590.accountservice.Security.UserPrincipal;
 import edu.miu.cs.cs590.accountservice.Services.JobSeekerService;
+import edu.miu.cs.cs590.accountservice.Services.ProducerService;
 import edu.miu.cs.cs590.accountservice.Services.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,11 +24,13 @@ public class SkillController {
 
     private final SkillService skillService;
     private final JobSeekerService jobSeekerService;
+    private final ProducerService producerService;
 
     @Autowired
-    public SkillController(SkillService skillService, JobSeekerService jobSeekerService) {
+    public SkillController(SkillService skillService, JobSeekerService jobSeekerService,ProducerService producerService) {
         this.skillService = skillService;
         this.jobSeekerService = jobSeekerService;
+        this.producerService = producerService;
     }
 
     @GetMapping("/")
@@ -40,7 +43,9 @@ public class SkillController {
 
         JobSeeker js = jobSeekerService.findByUserId(currentUser.getId());
         newSkill.setJobSeeker(js);
-        return this.skillService.save(newSkill);
+        newSkill = this.skillService.save(newSkill);
+        producerService.sendMessage(js.toString());
+        return newSkill;
     }
 
     @GetMapping("/{id}")
