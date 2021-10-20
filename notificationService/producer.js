@@ -13,13 +13,13 @@ const kafka = new Kafka({
 })
 
 const producer = kafka.producer()
-const Producer = async (message) => {
+const Producer = async (job_seeker) => {
   console.log("Notification Producer");
   await producer.connect()
   await producer.send({
-    topic: process.env.NOTIFICATION_TOPIC,
+    topic: process.env.EMAIL_TOPIC,
     messages: [
-      { value: JSON.stringify({user_id: message.user_id, subject: "New Vacancy opened for you", body: "Go and login to check out this opportunity"}) },
+      { value: JSON.stringify({to: job_seeker.email, subject: "New Vacancy opened for you", text: "Go and login to check out this opportunity"}) },
     ],
   });
 }
