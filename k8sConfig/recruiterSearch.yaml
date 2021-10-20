@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: job-search-ms-deployment
+  name: recruiter-search-deployment
   labels:
-    app: job-search-ms
+    app: recruiter-search-ms
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: job-search-ms
+      app: recruiter-search-ms
   template:
     metadata:
       labels:
-        app: job-search-ms
+        app: recruiter-search-ms
     spec:
       containers:
-        - name: job-search-ms
-          image: pyordan/js-job-search-service:1.9
+        - name: recruiter-search-ms
+          image: pyordan/js-recruiter-search-service:1.0
           ports:
           - containerPort: 8000
           env:
@@ -37,33 +37,33 @@ spec:
               configMapKeyRef:
                 name: job-search-app-config
                 key: es-address
-          - name: JOBSEARCH_SERVICE_APP
+          - name: RECRUITERSEARCH_SERVICE_APP
             valueFrom: 
               configMapKeyRef:
                 name: job-search-app-config
-                key: job-search-client-id
-          - name: KAFKA1 
+                key: recruiter-search-client-id
+          - name: KAFKA 
             valueFrom: 
               configMapKeyRef:
                 name: job-search-app-config
                 key: kafka-address
-          - name: JOBSEARCH_SERVICE_GROUP
-            value: "jobSearchingService001"          
-          - name: JOBSEARCH_SERVICE_TOPIC
+          - name: RECRUITERSEARCH_SERVICE_GROUP
+            value: "recruiterSearchingService001"          
+          - name: RECRUITERSEARCH_SERVICE_TOPIC
             valueFrom: 
               configMapKeyRef:
                 name: job-search-app-config
-                key: kafka-job-create-topic-name
+                key: kafka-recruiter-create-topic-name
           - name: ELASTICINDEX
-            value: "jobs"         
+            value: "recruiter"         
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: job-search-ms-service
+  name: recruiter-search-ms-service
 spec:
   selector:
-    app: job-search-ms
+    app: recruiter-search-ms
   ports:
     - protocol: TCP
       port: 8000

@@ -1,7 +1,8 @@
 require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
-const { Client } = require('@elastic/elasticsearch')
+
+const { Client } = require('@elastic/elasticsearch');
+
 const client = new Client({
     node: process.env.ES_ADDRESS,
     auth: {
@@ -16,7 +17,7 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/api/search', jobsRoutes);
+app.use('/api/job/search', jobsRoutes);
 
 app.use((req, res, next) => {
     console.log(req.url, req.body, req.method, req.params);
