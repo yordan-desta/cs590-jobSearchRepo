@@ -30,7 +30,7 @@ const runAdmin = async () => {
   await admin.connect()
   await admin.createTopics({
     topics: [{
-      topic: process.env.NOTIFICATION_TOPIC
+      topic: process.env.EMAIL_TOPIC
     }]
   }).then((msg) => console.log(`Topic Created?: ${msg}`));
   await admin.listTopics().then((data) => console.log(data))
