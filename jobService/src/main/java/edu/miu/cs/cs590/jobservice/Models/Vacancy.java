@@ -1,5 +1,9 @@
 package edu.miu.cs.cs590.jobservice.Models;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import edu.miu.cs.cs590.jobservice.Models.enums.Category;
 import edu.miu.cs.cs590.jobservice.Models.enums.VacancyStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,8 +31,13 @@ public class Vacancy {
     private String location;
     @Lob
     private String jobDescription;
+
+    @JsonSerialize(using= LocalDateSerializer.class)
+    @JsonDeserialize(using= LocalDateDeserializer.class)
     private LocalDate postFromDate;
-    private LocalDate postToDate;
+
+    @JsonSerialize(using= LocalDateSerializer.class)
+    @JsonDeserialize(using= LocalDateDeserializer.class)    private LocalDate postToDate;
     private double salaryRangFrom;
     private double salaryRangTo;
     private VacancyStatus vacancyStatus;

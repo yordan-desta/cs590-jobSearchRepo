@@ -1,6 +1,8 @@
 package edu.miu.cs.cs590.jobservice.Controllers;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.miu.cs.cs590.jobservice.Exception.AppException;
 import edu.miu.cs.cs590.jobservice.Models.Company;
 import edu.miu.cs.cs590.jobservice.Models.Vacancy;
@@ -74,7 +76,7 @@ public class VacancyController {
 
     @PostMapping
     @PreAuthorize("hasRole('COMPANY')")
-    public Vacancy saveVacancy(@RequestBody VacancyRequest vacancyRequest, @CurrentUser UserPrincipal currentUser){
+    public Vacancy saveVacancy(@RequestBody VacancyRequest vacancyRequest, @CurrentUser UserPrincipal currentUser) throws JsonProcessingException {
         Company company = this.companyService.findByUser(currentUser.getId());
         if (company == null){
             throw new AppException("Cannot post vaccancy against");
@@ -91,9 +93,11 @@ public class VacancyController {
         //Company company = this.companyService.findById(vacancyRequest.getCompanyId().longValue());
 
         vacancy.setCompany(company);
-        vacancy = vacancyService.save(vacancy);
 
-        producerService.sendMessage(vacancy.toString());
+
+        vacancy = vacancyService.save(vacancy);
+        ObjectMapper mapper = new ObjectMapper();
+        producerService.sendMessage(mapper.writeValueAsString(vacancy));
 
         return vacancy;
     }
