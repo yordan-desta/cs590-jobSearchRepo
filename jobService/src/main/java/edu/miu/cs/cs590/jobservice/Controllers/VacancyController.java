@@ -12,6 +12,7 @@ import edu.miu.cs.cs590.jobservice.Payload.Response.ApiResponse;
 import edu.miu.cs.cs590.jobservice.Security.CurrentUser;
 import edu.miu.cs.cs590.jobservice.Security.UserPrincipal;
 import edu.miu.cs.cs590.jobservice.Services.CompanyService;
+import edu.miu.cs.cs590.jobservice.Services.ProducerService;
 import edu.miu.cs.cs590.jobservice.Services.VacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,10 +27,16 @@ import java.util.List;
 @RequestMapping("/api/vacancy")
 public class VacancyController {
 
+    private final ProducerService producerService;
+
     @Autowired
     private  VacancyService vacancyService;
     @Autowired
     private  CompanyService companyService;
+
+    public VacancyController(ProducerService producerService) {
+        this.producerService = producerService;
+    }
 
     @GetMapping("/{id}")
     public Vacancy getVacancy(@PathVariable Long id){
@@ -84,8 +91,11 @@ public class VacancyController {
         //Company company = this.companyService.findById(vacancyRequest.getCompanyId().longValue());
 
         vacancy.setCompany(company);
+        vacancy = vacancyService.save(vacancy);
 
-        return vacancyService.save(vacancy);
+        producerService.sendMessage(vacancy.toString());
+
+        return vacancy;
     }
 
 
