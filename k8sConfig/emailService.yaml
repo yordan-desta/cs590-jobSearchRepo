@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-service-ms-deployment
+  labels:
+    app: email-service-ms
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: email-service-ms
+  template:
+    metadata:
+      labels:
+        app: email-service-ms
+    spec:
+      containers:
+        - name: email-service-ms
+          image: pyordan/js-email-service:1.0
+          ports:
+          - containerPort: 8000
+          env:
+          - name: PORT 
+            value: "8000"
+          - name: KAFKA
+            valueFrom: 
+              configMapKeyRef:
+                name: job-search-app-config
+                key: kafka-address
+          - name: EMAIL_SERVICE_TOPIC
+            value: "email-topic"
+          - name: EMAIL_SERVICE_APP
+            value: "email-service-app"
+          - name: EMAIL_SERVICE_GROUP
+            value: "email-service-app"
+          - name: SENDGRID_API_KEY
+            value: "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"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: email-service-ms-service
+spec:
+  selector:
+    app: email-service-ms
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
