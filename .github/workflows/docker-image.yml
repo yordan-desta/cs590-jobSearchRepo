@@ -17,12 +17,12 @@ jobs:
         
     - name: Run a multi-line build
       run: |
-        docker build ./accoutService --file Dockerfile --tag my-image-name:$(date +%s)
-        docker build ./apiGateway --file Dockerfile --tag my-image-name:$(date +%s)
-        docker build ./candidateService --file Dockerfile --tag my-image-name:$(date +%s)
-        docker build ./emailService --file Dockerfile --tag my-image-name:$(date +%s)
-        docker build ./jobSearchService --file Dockerfile --tag my-image-name:$(date +%s)
-        docker build ./jobService --file Dockerfile --tag my-image-name:$(date +%s)
-        docker build ./notificationService --file Dockerfile --tag my-image-name:$(date +%s)
-        docker build ./recruiterSearchService --file Dockerfile --tag my-image-name:$(date +%s)
-        docker build ./recruiterService --file Dockerfile --tag my-image-name:$(date +%s)
+        docker build accoutService --tag my-image-name:$(date +%s)
+        docker build apiGateway --tag my-image-name:$(date +%s)
+        docker build candidateService --tag my-image-name:$(date +%s)
+        docker build emailService --tag my-image-name:$(date +%s)
+        docker build jobSearchService --tag my-image-name:$(date +%s)
+        docker build jobService --tag my-image-name:$(date +%s)
+        docker build notificationService --tag my-image-name:$(date +%s)
+        docker build recruiterSearchService --tag my-image-name:$(date +%s)
+        docker build recruiterService --tag my-image-name:$(date +%s)
