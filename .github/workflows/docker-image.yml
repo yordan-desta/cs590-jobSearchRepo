@@ -17,12 +17,11 @@ jobs:
         
     - name: Run a multi-line build
       run: |
-        docker build accoutService --tag my-image-name:$(date +%s)
-        docker build apiGateway --tag my-image-name:$(date +%s)
-        docker build candidateService --tag my-image-name:$(date +%s)
-        docker build emailService --tag my-image-name:$(date +%s)
-        docker build jobSearchService --tag my-image-name:$(date +%s)
-        docker build jobService --tag my-image-name:$(date +%s)
-        docker build notificationService --tag my-image-name:$(date +%s)
-        docker build recruiterSearchService --tag my-image-name:$(date +%s)
-        docker build recruiterService --tag my-image-name:$(date +%s)
+        docker build accoutService --tag pyordan/js-account-service:$(date +%s)
+        docker build apiGateway --tag pyordan/js-api-gateway-service:$(date +%s)
+        docker build candidateService --tag pyordan/js-candidates-service:$(date +%s)
+        docker build emailService --tag pyordan/js-email-service:$(date +%s)
+        docker build jobSearchService --tag pyordan/js-job-search-service:$(date +%s)
+        docker build jobService --tag pyordan/js-jobs-service:$(date +%s)
+        docker build notificationService --tag pyordan/js-notification-service:$(date +%s)
+        docker build recruiterSearchService --tag pyordan/js-recruiter-search-service:$(date +%s)
