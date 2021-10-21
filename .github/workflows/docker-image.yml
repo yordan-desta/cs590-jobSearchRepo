@@ -1,9 +1,9 @@
-name: ci
+name: Api Gateway Service
 
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
 
 jobs:
   docker:
