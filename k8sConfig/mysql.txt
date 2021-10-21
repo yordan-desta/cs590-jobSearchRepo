@@ -1,7 +1,7 @@
-helm install candidate-database bitnami/mysql \
+helm install candidates-database bitnami/mysql \
 --set auth.rootPassword=root \
 --set secondary.replicaCount=3 \
---set auth.database=candidate_db \
+--set auth.database=candidates_db \
 --set architecture=replication
 
 
