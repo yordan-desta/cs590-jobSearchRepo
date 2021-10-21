@@ -1,0 +1,1554 @@
+{
+	"info": {
+		"_postman_id": "76d8078e-3b23-4c89-8962-c0844ddb4c01",
+		"name": "SA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Vacancy",
+			"item": [
+				{
+					"name": "Get Vacancy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjIxMjIyMjM2LCJleHAiOjE2MjE4MjcwMzZ9.MTm5PluK58qNNiJKI_n6bvopnWVOwP2NXJHNnlw0Yt3ZdJ-YnIJYR89BRwf64VNkjOhfYrDiJy3AIFJ2e-p-4A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/js/vacancy/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"js",
+								"vacancy",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search by key word",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjI4NzIyNTYxLCJleHAiOjE2MjkzMjczNjF9.20PzFS4-SXjl8DWcQTZidd4s38fSaARsCH19AzGqfDqJ29Z3NEjumbbjdbdWKu44y0C8SRrPzhZ1nQkGHLMzQA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/js/search/vacancy/:keyword",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"js",
+								"search",
+								"vacancy",
+								":keyword"
+							],
+							"variable": [
+								{
+									"key": "keyword",
+									"value": "operating"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Vacancy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/js/vacancy/1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"js",
+								"vacancy",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vacancy List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjM0NjgwOTkyLCJleHAiOjE2MzUyODU3OTJ9.dmDZbMJOyy_4DnUrdPP7lwTGqD8DyUrFe_eKmeVrd_tGMRiGehS-ceyWepU-ie_uVNoeE9lQoa_33rgJE8-5Jg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/js/vacancy/",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"js",
+								"vacancy",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vacancy Applications List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjI4NzIyNTYxLCJleHAiOjE2MjkzMjczNjF9.20PzFS4-SXjl8DWcQTZidd4s38fSaARsCH19AzGqfDqJ29Z3NEjumbbjdbdWKu44y0C8SRrPzhZ1nQkGHLMzQA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/js/vacancy/applications/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"js",
+								"vacancy",
+								"applications",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vacancy Approved List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjI4NzIwODE3LCJleHAiOjE2MjkzMjU2MTd9.Ts49nzgJmB486tWNyVkaHPWwBtkS1BWslUs2SP_LdDZ4ZaLyJx2PgnJShIv4LNEEPogFOJ43pURLfrBrwSvnyQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/js/vacancy/approved",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"js",
+								"vacancy",
+								"approved"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin - Pendding Approval list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNjI4NzM3ODYwLCJleHAiOjE2MjkzNDI2NjB9.fdvBy-rv-_SAm5nArLnSubI7wy09QHy6BhItvCOO8wMuHRFXLbjG0-O2BZU_25cV-ob9tOuvNiODk-OSNdsScw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/js/vacancy/pending-approval/",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"js",
+								"vacancy",
+								"pending-approval",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Vacancy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Java Software Engineer II\",\n    \"location\":\"Austin, TX\",\n    \"jobDescription\": \"operating our autonomous vehicles on public roads to enable Argo to continue its testing, monitoring, and development of its Autonomous Vehicle System (AVS). Prior to getting behind the wheel, all AVSTSs undergo a rigorous training program which, among other things, teaches them about the underlying technolo\",\n    \"postFromDate\": \"2021-05-01\",\n    \"postToDate\": \"2022-05-01\",\n    \"salaryRangFrom\":50,\n    \"salaryRangTo\": 150\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/js/vacancy",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"js",
+								"vacancy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apply to Vacancy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjI4NzA0NDgzLCJleHAiOjE2MjkzMDkyODN9.VTKgvbHJWHB1yx81VOUSxhzfSGDLYOQSjy6H6vEDboNgs_OlPHcOkTvmn5yEoo0diMU8wEIFjqjZJldlO_gwIA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/js/vacancy/apply/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"js",
+								"vacancy",
+								"apply",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Vacancy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjI4NjE1OTY2LCJleHAiOjE2MjkyMjA3NjZ9.mnlKHO1GrKEPCNcAczygQSv0PnpQj0YDJnNj3hIHWDfO2LTW-U8Dos7-4hfVD_XLkYNYxvHpw40Pfj_EAev-2Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Graduate Software Engineer\",\n    \"location\":\"Austin, TX\",\n    \"jobDescription\": \"Improving the markets requires proprietary trading systems nimble enough to operate at peak efficiency in even the most extreme market conditions. Optiver's engineers build those systems. It starts with a rigorous training program, during which you'll learn the ins and outs of our trading systems and the engineering principles that underpin our decision-making. Some of the challenges you'll face daily include, automatically pricing diverse sets of financial instruments and guaranteeing our systems are safe and controlled in an environment with no room for error. Of course, rapidly changing market events ensure a steady flow of new and complex challenges that will require you to constantly sharpen your skills.\",\n    \"postFromDate\": \"2021-05-01\",\n    \"postToDate\": \"2022-05-01\",\n    \"salaryRangFrom\":50,\n    \"salaryRangTo\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/js/vacancy/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"js",
+								"vacancy",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin - Change Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNjI4NzA5MjQxLCJleHAiOjE2MjkzMTQwNDF9.eqmP3tjUHpV-2xcTvT2W_qqIMTJhGeukImd4QrxcUdSHkUgRCMmbl_g_SYnHotj7wdE_L00ZfhDUzQCwxloc3A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\":\"Published\"  \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/js/vacancy/change-status/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"js",
+								"vacancy",
+								"change-status",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "get Company",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/js/company/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"js",
+								"company",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Company Info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjIxMjIyODIzLCJleHAiOjE2MjE4Mjc2MjN9.CPr9NU8I3jeskIQpk2oxXHKttu7UXovos7bRqxZJAenc73TF4dOKk06w5hGkLRsCI2O_XfFGspAO4qJvIrj4WQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"street\":\"street\",\n    \"city\":\"city\",\n    \"state\":\"state\",\n    \"zipcode\":\"123123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/js/company/:id",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"js",
+								"company",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\":2,\n    \"street\":\"street\",\n    \"city\":\"city\",\n    \"state\":\"state\",\n    \"zipcode\":\"123123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/js/company",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"js",
+								"company"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Companies List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjIxMjIzMzQyLCJleHAiOjE2MjE4MjgxNDJ9.1D0lxcZnqUCcQ7AHKyoIXsT0TVftpLTYyfJKcdIY2umO8lQAQ5JD5MdgoZTNbI0Y-ZkZB5MyFywZ93L2acpMjA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/js/company/list",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"js",
+								"company",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account/Auth",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"salah-co\",\n    \"username\":\"salah-co\",\n    \"email\":\"salah.khudairat1@gmail.com\",\n    \"password\":\"salah\",\n    \"role\":\"ROLE_COMPANY\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/auth/signup",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usernameOrEmail\":\"salah-co\",\n    \"password\":\"salah\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/auth/signin",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjM0MDA4NjA2LCJleHAiOjE2MzQ2MTM0MDZ9.3cZQIiJJsOtI3BT9O6mGno6pgwJkV80M53MA9E9S--Yfm6MkiETGfLd-B3lFVYB-GON5XPv0umu6FC2Cr_w26g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usernameOrEmail\":\"salah.khudairat+2@gmail.com\",\n    \"password\":\"salah\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/auth/verify-token",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"verify-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "users - me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjIxMjI2OTQ0LCJleHAiOjE2MjE4MzE3NDR9.wPvSd4-NReg9Ljq6AnFpjqrxVL_xz41T6c1eBsagKS0lBM69a8gxvihIT3l8_xKQkzbTLJ7ac_nlZcUbiQcB7w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/user/me",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"user",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwiaWF0IjoxNjIxMTgzMTAyLCJleHAiOjE2MjE3ODc5MDJ9.Xt0f5WdEcJzr9jk77E48SJrtgkcQO1o_BP7_DsrXbd1gZwg90Sj6Vx5u1vdPcZb_8fbsyEjduiw1EV9P16nxnQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"salah\",\n    \"username\":\"greegnexdsr\",\n    \"email\":\"salah@adsd.asgsdds\",\n    \"password\":\"salah\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/user/create-admin",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"user",
+								"create-admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Skills",
+			"item": [
+				{
+					"name": "add skill",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"java\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/ca/skills",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"ca",
+								"skills"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete skill",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjIxMjI2NDM5LCJleHAiOjE2MjE4MzEyMzl9.DzfoFn3XnPhl-wpeD3lIVFcGGZKLjtXJ-w6WTD46hzkdFF2vgVXtGieLXBfXPWafneWXTKE9ombxx1ddtzOT-g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/api/skills/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"skills",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get skill",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjIxMjI2OTQ0LCJleHAiOjE2MjE4MzE3NDR9.wPvSd4-NReg9Ljq6AnFpjqrxVL_xz41T6c1eBsagKS0lBM69a8gxvihIT3l8_xKQkzbTLJ7ac_nlZcUbiQcB7w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/skills/:id",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"skills",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all  skils",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/ca/skills/",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"ca",
+								"skills",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Work Experiances",
+			"item": [
+				{
+					"name": "remove Work Experiance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjIxMjI3NTM5LCJleHAiOjE2MjE4MzIzMzl9.0mBPsatzDl79Xm6SymBFZGoqjBzEuUtYcnYhgiXdJv9WyKyLE17UMaFuymIu_2wLK4f34H_a1rs9Vd9gqawNRw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/work-experince/:id",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"work-experince",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Work Experiance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjI4NzIwODE3LCJleHAiOjE2MjkzMjU2MTd9.Ts49nzgJmB486tWNyVkaHPWwBtkS1BWslUs2SP_LdDZ4ZaLyJx2PgnJShIv4LNEEPogFOJ43pURLfrBrwSvnyQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyName\":\"coding\",\n    \"fromDate\": \"2020-01-10\",\n    \"toDate\": \"2022-03-02\",\n    \"lastSalary\": 200,\n    \"position\":\"position\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/api/work-experince/",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"work-experince",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Work Experiance",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjI4NzIwODE3LCJleHAiOjE2MjkzMjU2MTd9.Ts49nzgJmB486tWNyVkaHPWwBtkS1BWslUs2SP_LdDZ4ZaLyJx2PgnJShIv4LNEEPogFOJ43pURLfrBrwSvnyQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/api/work-experince/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"work-experince",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Education",
+			"item": [
+				{
+					"name": "remove Education",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjIxMjI5Njc2LCJleHAiOjE2MjE4MzQ0NzZ9.3UU7V5HN8dG-IWZ82CHgYy6UFWpST_STiK28eeS_dkIukTiWeOrqz3fpiVvr9dymsdmOweiq9M5JOYku0Hf6PA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/educations/:id",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"educations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Education",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjI4NzIwODE3LCJleHAiOjE2MjkzMjU2MTd9.Ts49nzgJmB486tWNyVkaHPWwBtkS1BWslUs2SP_LdDZ4ZaLyJx2PgnJShIv4LNEEPogFOJ43pURLfrBrwSvnyQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"degree\":\"Bachler in SE\",\n    \"toDate\": \"2022-02-02\",\n    \"gpa\": 2,\n    \"fromDate\": \"2020-01-02\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/api/educations/",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"educations",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Education",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjI4NzIwODE3LCJleHAiOjE2MjkzMjU2MTd9.Ts49nzgJmB486tWNyVkaHPWwBtkS1BWslUs2SP_LdDZ4ZaLyJx2PgnJShIv4LNEEPogFOJ43pURLfrBrwSvnyQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/api/educations/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"educations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Certificate",
+			"item": [
+				{
+					"name": "remove Certificate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjIxMjI5Njc2LCJleHAiOjE2MjE4MzQ0NzZ9.3UU7V5HN8dG-IWZ82CHgYy6UFWpST_STiK28eeS_dkIukTiWeOrqz3fpiVvr9dymsdmOweiq9M5JOYku0Hf6PA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/certificates/:id",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"certificates",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Certificate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjI4ODAyNTk5LCJleHAiOjE2Mjk0MDczOTl9.Xu76qvfOMzb1bi7YDQqDGtwIRFk208J2NpAKvuq3hx_ZUt_Phf9J7TH0_a-H6QUMyNYTnUOzElsKpZl-KQqT0A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"First Certificate\",\n    \"issuedBy\": \"Nejed\",\n    \"issueDate\": \"2020-02-01\",\n    \"expirationDate\": \"2022-02-01\"\n}\n\n\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/api/certificates/",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"certificates",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Certificate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjI4NzIwODE3LCJleHAiOjE2MjkzMjU2MTd9.Ts49nzgJmB486tWNyVkaHPWwBtkS1BWslUs2SP_LdDZ4ZaLyJx2PgnJShIv4LNEEPogFOJ43pURLfrBrwSvnyQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8080/api/certificates/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"certificates",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Job Seeker",
+			"item": [
+				{
+					"name": "GET Jobseeker Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjI4NzIwODE3LCJleHAiOjE2MjkzMjU2MTd9.Ts49nzgJmB486tWNyVkaHPWwBtkS1BWslUs2SP_LdDZ4ZaLyJx2PgnJShIv4LNEEPogFOJ43pURLfrBrwSvnyQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8080/api/job-seeker/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"job-seeker",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Jobseeker Inf",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjM0NjE3NjQ4LCJleHAiOjE2MzUyMjI0NDh9.E70PqaF42JdIsGjpbOKm49Ai_Yjnb12Uq51mNTFieo_A1QlUMiL_vliRBO_Ff2PFzmPHtzsiJaHweuMMbv3zJA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bio\":\"bior4\",\n    \"current_position\":\"this is pdosition\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8080/api/job-seeker/:id",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"job-seeker",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creat Jobseeker",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bio\":\"bio2\",\n    \"currentPosition\":\"this is pdosition\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/api/ca/job-seeker",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"ca",
+								"job-seeker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Jobseeker",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjIxMjI5MDY4LCJleHAiOjE2MjE4MzM4Njh9.zCRv_mOOL_Sl8JFeDEOO9Fp40Lx4q03lK_QzSp3_uxLkHrsibyVtrbRgFFR2pT15XpI7GcoRnikubtmUcM1TqQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bio\":\"bio2\",\n    \"current_position\":\"this is pdosition\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/job_seekers/:id",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"job_seekers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Job Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/job/search?job=saasasasas",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"job",
+								"search"
+							],
+							"query": [
+								{
+									"key": "job",
+									"value": "saasasasas"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Candidate Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/api/seeker/search?recruiter=javascript",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"api",
+								"seeker",
+								"search"
+							],
+							"query": [
+								{
+									"key": "recruiter",
+									"value": "javascript"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
