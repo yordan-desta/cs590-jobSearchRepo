@@ -39,6 +39,7 @@ public class JobSeeker {
 
     //private User user;
     private Long userId;
+    private String email;
 
 
     private String country;

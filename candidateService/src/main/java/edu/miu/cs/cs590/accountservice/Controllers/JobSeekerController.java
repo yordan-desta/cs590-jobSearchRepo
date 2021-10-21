@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/job-seeker")
+@RequestMapping("/api/ca/job-seeker")
 public class JobSeekerController {
 
 	@Autowired
@@ -45,6 +45,7 @@ public class JobSeekerController {
 		newJobSeeker.setBio(jsRequest.getBio());
 		newJobSeeker.setCurrentPosition(jsRequest.getCurrentPosition());
 		newJobSeeker.setUserId(currentUser.getId());
+		newJobSeeker.setEmail(currentUser.getEmail());
 		newJobSeeker = this.jobSeekerService.save(newJobSeeker);
 
 		ObjectMapper mapper = new ObjectMapper();

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/certificates")
+@RequestMapping("/api/ca/certificates")
 @PreAuthorize("hasRole('JOBSEEKER')")
 public class CertificateController {
 
