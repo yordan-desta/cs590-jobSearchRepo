@@ -42,7 +42,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: email-service-ms-service
+  name: http-email-service-ms-service
 spec:
   selector:
     app: email-service-ms
@@ -50,3 +50,4 @@ spec:
     - protocol: TCP
       port: 8000
       targetPort: 8000
+      name: http

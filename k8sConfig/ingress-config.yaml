@@ -10,6 +10,6 @@ spec:
         pathType: ImplementationSpecific
         backend:
           service:
-            name: api-gateway-ms-service
+            name: http-api-gateway-ms-service
             port:
               number: 8000

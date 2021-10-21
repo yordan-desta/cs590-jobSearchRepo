@@ -64,7 +64,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: notification-service-ms-service
+  name: http-notification-service-ms-service
 spec:
   selector:
     app: notification-service-ms
@@ -72,3 +72,4 @@ spec:
     - protocol: TCP
       port: 8000
       targetPort: 8000
+      name: http

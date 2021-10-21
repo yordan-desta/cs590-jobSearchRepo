@@ -60,7 +60,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: recruiter-search-ms-service
+  name: http-recruiter-search-ms-service
 spec:
   selector:
     app: recruiter-search-ms
@@ -68,3 +68,4 @@ spec:
     - protocol: TCP
       port: 8000
       targetPort: 8000
+      name: http
