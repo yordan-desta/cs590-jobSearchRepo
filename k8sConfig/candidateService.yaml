@@ -47,7 +47,7 @@ spec:
                 name: job-search-app-secret
                 key: jwt-expire 
           - name: ACCOUNT_SERVICE
-            value: http://account-ms-service:8000
+            value: http://http-account-ms-service:8000
           - name: KAFKA_SERVER
             valueFrom: 
               configMapKeyRef:
@@ -64,7 +64,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: candidates-ms-service
+  name: http-candidates-ms-service
 spec:
   selector:
     app: candidates-ms
