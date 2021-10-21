@@ -13,10 +13,6 @@ jobs:
     - uses: actions/checkout@v2 
     - name: Run a multi-line build
       run: |
-        # docker build accoutService --tag pyordan/js-account-service:latest
-        # docker build apiGateway --tag pyordan/js-api-gateway-service:latest
-        # docker build candidateService --tag pyordan/js-candidates-service:latest
-        # docker build emailService --tag pyordan/js-email-service:latest
         docker build jobSearchService --tag pyordan/js-job-search-service:latest
         docker build jobService --tag pyordan/js-jobs-service:latest
         docker build notificationService --tag pyordan/js-notification-service:latest
