@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-service-ms-deployment
+  labels:
+    app: notification-service-ms
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: notification-service-ms
+  template:
+    metadata:
+      labels:
+        app: notification-service-ms
+    spec:
+      containers:
+        - name: notification-service-ms
+          image: pyordan/js-notification-service:1.0
+          ports:
+          - containerPort: 8000
+          env:
+          - name: PORT 
+            value: "8000"
+          - name: KAFKA_BROKER_URL
+            valueFrom: 
+              configMapKeyRef:
+                name: job-search-app-config
+                key: kafka-address
+          - name: KAFKA_CLIENT_ID
+            value: "notificationService1221"
+          - name: JOB_SEEKER_SKILLS_GROUP
+            value: "job-seeker-skills-group"
+          - name: JOB_GROUP
+            value: "job-group"
+          - name: EMAIL_TOPIC
+            valueFrom: 
+              configMapKeyRef:
+                name: job-search-app-config
+                key: email-kafka-topic
+          - name: JOB_TOPIC
+            valueFrom: 
+              configMapKeyRef:
+                name: job-search-app-config
+                key: kafka-job-create-topic-name
+          - name: JOB_SEEKER_SKILLS_TOPIC
+            valueFrom: 
+              configMapKeyRef:
+                name: job-search-app-config
+                key: kafka-recruiter-create-topic-name
+          - name: MONGODB_USER
+            valueFrom:
+              secretKeyRef:
+                name: job-search-app-secret
+                key: notification-db-username
+          - name: MONGODB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: job-search-app-secret
+                key: notification-db-password
+          - name: MONGODB_HOST
+            value: notifications-database-mongodb
+          - name: MONGODB_DATABASE
+            value: "notifications_db"                                   
+          - name: MONGODB_PORT
+            value: "27017"
+          - name: MONGODB_DOCKER_PORT
+            value: "27017"                      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notification-service-ms-service
+spec:
+  selector:
+    app: notification-service-ms
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000

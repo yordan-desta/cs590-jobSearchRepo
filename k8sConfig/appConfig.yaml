@@ -9,3 +9,4 @@ data:
   kafka-job-create-topic-name: jobCreated
   kafka-recruiter-create-topic-name: recruiterCreated
   recruiter-search-client-id: recruiterSearchClientId8000
+  email-kafka-topic: email-topic-azx

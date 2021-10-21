@@ -1,5 +1,5 @@
-FROM node:12-alpine
-WORKDIR .
-COPY ./ /
-RUN npm i
-CMD ["node", "--max_old_space_size=4112", "index.js"]
+FROM node:alpine3.10
+COPY . .
+RUN npm install
+EXPOSE 8000
+ENTRYPOINT ["node", "index.js"]
