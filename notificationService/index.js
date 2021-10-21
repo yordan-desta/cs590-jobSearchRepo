@@ -70,8 +70,10 @@ const runJobSeekerConsumer = async() => {
             let result = JSON.parse(message.value.toString());
             mongoClient.db().collection("jobseekers").insertOne(result).catch((e) => {
                 console.log(e);
+            }).then((data) => {
+                console.log("saved" + data);
             })
-            console.log({ user_id: result.user_id, skills: result.skills })
+            console.log(result);
         },
     })
 }

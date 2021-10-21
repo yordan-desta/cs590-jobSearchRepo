@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: notification-service-ms
-          image: pyordan/js-notification-service:1.5
+          image: pyordan/js-notification-service:1.6
           ports:
           - containerPort: 8000
           env:
