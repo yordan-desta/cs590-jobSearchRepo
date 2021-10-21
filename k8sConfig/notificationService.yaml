@@ -59,7 +59,7 @@ spec:
                 name: job-search-app-secret
                 key: notification-db-password
           - name: MONGODB_HOST
-            value: notifications-database2-mongodb-0
+            value: notifications-database2-mongodb-headless
           - name: MONGODB_DATABASE
             value: "notifications_db"                                   
           - name: MONGODB_PORT
