@@ -1,5 +1,14 @@
-helm install jobs-database bitnami/mysql \
+helm install candidate-database bitnami/mysql \
 --set auth.rootPassword=root \
 --set secondary.replicaCount=3 \
---set auth.database=jobs_db \
+--set auth.database=candidate_db \
 --set architecture=replication
+
+
+helm install my-mongo-db-server bitnami/mongodb \
+--set auth.enabled=false \
+--set secondary.replicaCount=3 \
+--set auth.database=my_database \
+--set architecture=replicaset \
+--set auth.username=root \
+--set auth.password=root
