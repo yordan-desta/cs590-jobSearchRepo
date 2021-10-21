@@ -5,7 +5,7 @@ metadata:
   labels:
     app: email-service-ms
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: email-service-ms
