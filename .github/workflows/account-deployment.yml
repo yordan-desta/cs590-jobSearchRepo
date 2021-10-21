@@ -28,6 +28,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./accountService/
+          context: ./accoutService/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/js-account-service:latest
