@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: notification-service-ms
-          image: pyordan/js-notification-service:1.4
+          image: pyordan/js-notification-service:1.5
           ports:
           - containerPort: 8000
           env:
@@ -47,19 +47,13 @@ spec:
             valueFrom: 
               configMapKeyRef:
                 name: job-search-app-config
-                key: kafka-recruiter-create-topic-name
+                key: kafka-candidate-modified-topic-name
           - name: MONGODB_USER
-            valueFrom:
-              secretKeyRef:
-                name: job-search-app-secret
-                key: notification-db-username
+            value: "root"
           - name: MONGODB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: job-search-app-secret
-                key: notification-db-password
+            value: "root"
           - name: MONGODB_HOST
-            value: notifications-database2-mongodb-1
+            value: notification-open-mongo-db-server-mongodb
           - name: MONGODB_DATABASE
             value: "notifications_db"                                   
           - name: MONGODB_PORT

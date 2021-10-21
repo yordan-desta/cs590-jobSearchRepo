@@ -17,10 +17,17 @@ const jobsSearchAPi = process.env.JOB_SEARCH_API;
 const candidateSearchApi = process.env.CANDIDATE_SEARCH_API;
 const jobsAPi = process.env.JOB_API;
 const accountsApi = process.env.ACCOUNT_API;
+const candidateAPI = process.env.CANDIDATE_API;
 
 const jobSearchProxy = createProxyMiddleware({
     target: process.env.JOB_SEARCH_ENDPOINT,
     pathRewrite: { jobsSearchAPi: '/' },
+    changeOrigin: true,
+    onProxyReq: fixRequestBody
+});
+const candidateProxy = createProxyMiddleware({
+    target: process.env.CANDIDATE_ENDPOINT,
+    pathRewrite: { candidateAPI: '/' },
     changeOrigin: true,
     onProxyReq: fixRequestBody
 });;
@@ -49,6 +56,7 @@ app.use(jobsSearchAPi, jobSearchProxy);
 app.use(candidateSearchApi, candidateSearchProxy);
 app.use(jobsAPi, jobsProxy);
 app.use(accountsApi, accountsProxy);
+app.use(candidateAPI, candidateProxy);
 
 app.get('/', (req, res) => {
     res.json("working");

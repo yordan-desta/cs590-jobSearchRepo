@@ -34,7 +34,7 @@ const consumer = kafka.consumer({ groupId: gid + Date.now() });
 const run = async() => {
     await consumer.connect();
     await consumer.subscribe({
-        topic: process.env.JOBSEARCH_SERVICE_TOPIC,
+        topic: process.env.RECRUITERSEARCH_SERVICE_TOPIC,
         fromBeginning: true
     })
 
@@ -45,6 +45,7 @@ const run = async() => {
                 const data = JSON.parse(message.value.toString());
                 client.index({
                     index: process.env.ELASTICINDEX,
+                    id: "seeker_" + data.id,
                     body: data
                 }).then(res => {
                     console.log(topic, JSON.parse(message.value.toString()));

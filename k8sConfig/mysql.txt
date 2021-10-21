@@ -5,10 +5,10 @@ helm install candidates-database bitnami/mysql \
 --set architecture=replication
 
 
-helm install my-mongo-db-server bitnami/mongodb \
+helm install notification-open-mongo-db-server bitnami/mongodb \
 --set auth.enabled=false \
---set secondary.replicaCount=3 \
---set auth.database=my_database \
---set architecture=replicaset \
 --set auth.username=root \
 --set auth.password=root
+
+helm install notification-open-mongo-db-server bitnami/mongodb \
+--set auth.enabled=false \

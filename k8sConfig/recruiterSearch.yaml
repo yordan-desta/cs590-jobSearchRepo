@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: recruiter-search-ms
-          image: pyordan/js-recruiter-search-service:1.1
+          image: pyordan/js-recruiter-search-service:1.4
           ports:
           - containerPort: 8000
           env:
@@ -53,9 +53,9 @@ spec:
             valueFrom: 
               configMapKeyRef:
                 name: job-search-app-config
-                key: kafka-recruiter-create-topic-name
+                key: kafka-candidate-modified-topic-name
           - name: ELASTICINDEX
-            value: "recruiter"         
+            value: "seeker"         
 ---
 apiVersion: v1
 kind: Service

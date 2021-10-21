@@ -6,10 +6,10 @@ const { query } = require("express");
 const client = new Client({ node: process.env.ES_ADDRESS })
 
 
-router.get("/", async (req, res) => {
+router.get("/", async(req, res) => {
     await client.indices.refresh({ index: process.env.ELASTICINDEX })
     let query = { index: process.env.ELASTICINDEX }
-    if(req.query.recruiter) query.q = `*${req.query.recruiter}*`;
+    if (req.query.seeker) query.q = `*${req.query.seeker}*`;
     await client.search(query).then(response => {
         return res.status(200).json({
             jobs: response.body.hits.hits

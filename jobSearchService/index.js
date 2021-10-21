@@ -46,6 +46,7 @@ const run = async() => {
                 const data = JSON.parse(message.value.toString());
                 client.index({
                     index: process.env.ELASTICINDEX,
+                    id: "job_" + data.id,
                     body: data
                 }).then(res => {
                     console.log(topic, JSON.parse(message.value.toString()));
