@@ -68,7 +68,7 @@ const runJobSeekerConsumer = async() => {
     await consumerJobSeeker.run({
         eachMessage: async({ topic, partition, message }) => {
             let result = JSON.parse(message.value.toString());
-            mongoClient.db().collection("jobseekers").insertOne({ user_id: result.user_id, skills: result.skills }).catch((e) => {
+            mongoClient.db().collection("jobseekers").insertOne(result).catch((e) => {
                 console.log(e);
             })
             console.log({ user_id: result.user_id, skills: result.skills })
