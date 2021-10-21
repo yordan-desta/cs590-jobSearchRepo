@@ -14,7 +14,6 @@ jobs:
     - name: Run a multi-line build
       run: |
         docker build jobSearchService --tag pyordan/js-job-search-service:latest
-        docker build jobService --tag pyordan/js-jobs-service:latest
         docker build notificationService --tag pyordan/js-notification-service:latest
         docker build recruiterSearchService --tag pyordan/js-recruiter-search-service:latest
 
