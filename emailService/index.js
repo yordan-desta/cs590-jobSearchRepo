@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const { Kafka } = require("kafkajs");
 const sendEmail = require("./sendgrid");
+const mailTo = require("./email");
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -31,7 +32,7 @@ const run = async() => {
         eachMessage: async({ topic, partion, message }) => {
             const data = JSON.parse(message.value.toString());
             const { to, subject, text} = data;
-            sendEmail(to, subject, text);
+            mailTo(to, subject, text);
         }
     });
 
