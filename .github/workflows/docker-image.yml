@@ -40,14 +40,14 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         run: |
-          docker push pyordan/js-account-service:latest
-          docker push pyordan/js-api-gateway-service:latest
-          docker push pyordan/js-candidates-service:latest
-          docker push pyordan/js-email-service:latest
-          docker push pyordan/js-job-search-service:latest
-          docker push pyordan/js-jobs-service:latest
-          docker push pyordan/js-notification-service:latest
-          docker push pyordan/js-recruiter-search-service:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/js-account-service:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/js-api-gateway-service:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/js-candidates-service:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/js-email-service:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/js-job-search-service:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/js-jobs-service:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/js-notification-service:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/js-recruiter-search-service:latest
         
         
 #         uses: docker/build-push-action@v2
