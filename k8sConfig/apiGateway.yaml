@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: api-gateway-ms
-          image: pyordan/js-api-gateway-service:1.4
+          image: pyordan/js-api-gateway-service:latest
           ports:
           - containerPort: 8000
           env:

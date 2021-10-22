@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: account-ms
-          image: pyordan/js-account-service:1.0
+          image: pyordan/js-account-service:latest
           ports:
           - containerPort: 8000
           env:
