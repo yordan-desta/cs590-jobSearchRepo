@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require('cors')
 
 const { Client } = require('@elastic/elasticsearch');
 
@@ -13,8 +14,11 @@ const client = new Client({
 const { Kafka } = require("kafkajs");
 const { json } = require("body-parser");
 const jobsRoutes = require("./routes/jobs");
+
 const app = express();
 
+app.use(cors());
+app.options('*', cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/api/job/search', jobsRoutes);
