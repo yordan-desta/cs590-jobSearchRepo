@@ -26,7 +26,3 @@ jobs:
     - name: Deploy
       run: |-
         kubectl apply -f ./k8sConfig
-        
-        
-#         kubectl rollout status deployment/$DEPLOYMENT_NAME
-#         
