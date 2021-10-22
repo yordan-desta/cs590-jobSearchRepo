@@ -30,4 +30,4 @@ jobs:
         with:
           context: ./emailService/
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/js-api-email-service:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/js-email-service:latest
