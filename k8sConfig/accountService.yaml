@@ -17,6 +17,7 @@ spec:
       containers:
         - name: account-ms
           image: pyordan/js-account-service:latest
+          imagePullPolicy: Always
           ports:
           - containerPort: 8000
           env:

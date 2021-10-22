@@ -17,6 +17,8 @@ spec:
       containers:
         - name: candidates-ms
           image: pyordan/js-candidates-service:latest
+          imagePullPolicy: Always
+
           ports:
           - containerPort: 8000
           env:

@@ -17,6 +17,7 @@ spec:
       containers:
         - name: notification-service-ms
           image: pyordan/js-notification-service:latest
+          imagePullPolicy: Always
           ports:
           - containerPort: 8000
           env:

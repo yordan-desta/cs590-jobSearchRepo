@@ -17,6 +17,7 @@ spec:
       containers:
         - name: email-service-ms
           image: pyordan/js-email-service:latest
+          imagePullPolicy: Always
           ports:
           - containerPort: 8000
           env:

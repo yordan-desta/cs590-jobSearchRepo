@@ -17,6 +17,7 @@ spec:
       containers:
         - name: job-search-ms
           image: pyordan/js-job-search-service:latest
+          imagePullPolicy: Always
           ports:
           - containerPort: 8000
           env:
