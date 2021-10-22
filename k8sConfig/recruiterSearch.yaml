@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: recruiter-search-ms
-          image: pyordan/js-recruiter-search-service:1.4
+          image: pyordan/js-recruiter-search-service:latest
           ports:
           - containerPort: 8000
           env:

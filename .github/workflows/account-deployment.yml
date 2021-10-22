@@ -1,4 +1,4 @@
-name: Email Service
+name: Account Service
 
 on:
   push:
@@ -28,6 +28,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./emailService/
+          context: ./accoutService/
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/js-email-service:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/js-account-service:latest

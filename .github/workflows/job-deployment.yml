@@ -1,4 +1,4 @@
-name: Api Gateway Service
+name: Job Service
 
 on:
   push:
@@ -28,6 +28,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./apiGateway/
+          context: ./jobService/
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/js-api-gateway-service:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/js-jobs-service:latest

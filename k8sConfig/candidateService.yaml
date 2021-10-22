@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: candidates-ms
-          image: pyordan/js-candidates-service:1.0
+          image: pyordan/js-candidates-service:latest
           ports:
           - containerPort: 8000
           env:
