@@ -12,8 +12,11 @@ const client = new Client({
 const { Kafka } = require("kafkajs");
 const { json } = require("body-parser");
 const recruiterRoutes = require("./routes/recruiter");
+const cors = require('cors');
 const app = express();
 
+app.use(cors());
+app.options('*', cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/api/seeker/search', recruiterRoutes);
